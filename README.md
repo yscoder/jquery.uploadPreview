@@ -1,4 +1,10 @@
-# jquery.uploadPreview.js
+# jquery.uploadPreview.js v0.0.2
+
+## 更新
+新增参数：
++ fillBox: true 图片充满容器，false 等比缩放。
+
+# jquery.uploadPreview.js v0.0.1
 图片上传本地预览插件
 
 ## 浏览器兼容性
