@@ -16,11 +16,9 @@
         overflow: hidden;
         margin: 30px 0;
     }
-    .logo-350, .logo-350 img {
+    .logo-350 {
         width: 350px;
         height: 350px;
-    }
-    .logo-350 {
         margin-right: 30px;
     }
     .logo-200, .logo-200 img {
@@ -43,8 +41,10 @@
         height: 60px;
     }
  
-    .logo-350, .logo-200, .logo-100, .logo-60, .qrcode {
+    .logo-350, .logo-200, .logo-100, .logo-60 {
         border: 1px solid #ddd;
+    }
+    .logo-200, .logo-100, .logo-60 {
         overflow: hidden;
     }
 </style>
@@ -52,7 +52,7 @@
 <body>
     <input type="file" value="上传文件" id="file">  
     <div class="logo-wrap">
-        <div class="fl logo-350"></div>
+        <div class="fl logo-350"><div class="content"></div></div>
         <div class="fl logo-200-wrap">
           <div class="logo-200"><div class="content"></div></div>
           <div>
@@ -69,12 +69,12 @@
     $("#file").uploadPreview({ 
         width: 350,     
         height: 350, 
-        imgDiv: '.logo-350',    
+        imgDiv: '.logo-350 .content',    
         anyTarget: '.logo-200 .content, .logo-100 .content, .logo-60 .content',
         maxSize: 1024 * 2,
         callback: function(el) {
             var jOption = {
-                setSelect: [0, 0, 350, 350],
+                setSelect: [75, 75, 275, 275],
                 minSize: [200, 200],
                 onChange: updatePreview,
                 onSelect: updatePreview,
@@ -89,7 +89,6 @@
                 var api = $.Jcrop(el.selector, jOption); 
             } else {
                 el.Jcrop(jOption);
-                console.log(111)
             }
  
         }
@@ -99,14 +98,18 @@
         if (parseInt(c.w) > 0) {
             $('.logo-200, .logo-100, .logo-60').each(function(index, el) {
                 var box = $(el), content = box.find('.content'), img = content.find('img');
-                content.width($('.logo-350').outerWidth()).height($('.logo-350').outerHeight());
- 
-                var rx = box.width() / c.w;
-                var ry = box.height() / c.h;
- 
+                
+                var w = $('.logo-350 img').outerWidth(),
+                    h = $('.logo-350 img').outerHeight();
+
+                content.width(w).height(h);
+
+                var rx = box.width() / c.w,
+                    ry = box.height() / c.h;
+
                 img.css({
-                    width: Math.round(rx * 350) + 'px',
-                    height: Math.round(ry * 350) + 'px',
+                    width: Math.round(rx * w) + 'px',
+                    height: Math.round(ry * h) + 'px',
                     marginLeft: '-' + Math.round(rx * c.x) + 'px',
                     marginTop: '-' + Math.round(ry * c.y) + 'px'
                 });
