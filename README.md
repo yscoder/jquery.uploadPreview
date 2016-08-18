@@ -1,5 +1,7 @@
 # jquery.uploadPreview.js v0.0.2
 
+[Demo](http://yscoder.github.io/jquery.uploadPreview/Demo.html)
+
 ## 更新
 新增参数：
 + fillBox: true 图片充满容器，false 等比缩放。
